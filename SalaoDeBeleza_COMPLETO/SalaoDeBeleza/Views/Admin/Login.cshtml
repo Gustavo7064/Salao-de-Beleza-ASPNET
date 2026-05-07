@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Login";
+    var returnUrl = ViewBag.ReturnUrl as string;
+}
+<div class="card-soft p-4" style="max-width:420px;margin:40px auto;">
+    <h2 class="mb-3">Login</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <form method="post" asp-action="Login">
+        @Html.AntiForgeryToken()
+        <input type="hidden" name="returnUrl" value="@returnUrl" />
+        <div class="mb-3">
+            <label class="form-label">Usuário</label>
+            <input class="form-control" name="username" required />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Senha</label>
+            <input class="form-control" name="password" type="password" required />
+        </div>
+        <button class="btn btn-brand text-black w-100">Entrar</button>
+    </form>
+</div>

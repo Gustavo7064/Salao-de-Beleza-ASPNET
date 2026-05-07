@@ -1,0 +1,79 @@
+@model SalaoDeBeleza.Models.Profissional
+
+@{
+    ViewData["Title"] = "Editar Profissional";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fas fa-edit"></i> Editar Profissional</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Editar" method="post" enctype="multipart/form-data">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="IdProfissional" value="@Model.IdProfissional" />
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="mb-3">
+                        <label class="form-label">Nome <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" name="Nome" value="@Model.Nome" required />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Especialidade</label>
+                        <input type="text" class="form-control" name="Especialidade" value="@(Model.Especialidade ?? "")" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">CPF</label>
+                        <input type="text" class="form-control" name="Cpf" value="@(Model.Cpf ?? "")" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto</label>
+                        <input type="file" class="form-control" name="fotoArquivo" accept="image/*" />
+                        <small class="text-muted">Deixe em branco para manter a foto atual</small>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card bg-light">
+                        <div class="card-body">
+                            <h6 class="card-title">Foto Atual</h6>
+                            <div id="photoPreview" style="text-align: center;">
+                                @if (!string.IsNullOrEmpty(Model.Foto))
+                                {
+                                    <img src="~/img/fotos/@Model.Foto" alt="Foto" class="img-preview" />
+                                }
+                                else
+                                {
+                                    <i class="fas fa-image" style="font-size: 4rem; color: #ccc;"></i>
+                                    <p class="text-muted mt-2">Sem foto</p>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar Alterações</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.querySelector('input[name="fotoArquivo"]')?.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('photoPreview').innerHTML = '<img src="' + event.target.result + '" style="max-width: 100%; border-radius: 6px;" />';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+</script>

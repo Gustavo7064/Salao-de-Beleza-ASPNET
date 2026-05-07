@@ -1,0 +1,448 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Salão de Beleza</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        :root {
+            --primary-color: #8b5a8f;
+            --secondary-color: #d4a5d4;
+            --accent-color: #f0e5f0;
+            --dark-color: #2c2c2c;
+            --light-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-color);
+            color: var(--dark-color);
+        }
+
+        /* LAYOUT PRINCIPAL */
+        .main-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6d4570 100%);
+            color: white;
+            padding: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-header {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .sidebar-header h4 {
+            margin: 0;
+            font-weight: 700;
+            font-size: 1.3rem;
+            letter-spacing: 0.5px;
+        }
+
+        .sidebar-header p {
+            margin: 5px 0 0 0;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
+        .sidebar-nav {
+            padding: 20px 0;
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            margin: 0;
+        }
+
+        .sidebar-nav a {
+            display: block;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .sidebar-nav a:hover,
+        .sidebar-nav a.active {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-left-color: var(--secondary-color);
+            padding-left: 25px;
+        }
+
+        .sidebar-nav i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-footer {
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .sidebar-footer a {
+            display: block;
+            padding: 10px 0;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .sidebar-footer a:hover {
+            color: white;
+        }
+
+        /* CONTEÚDO PRINCIPAL */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* TOPBAR */
+        .topbar {
+            background: white;
+            padding: 15px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .topbar-user {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .user-info {
+            text-align: right;
+            font-size: 0.9rem;
+        }
+
+        .user-info strong {
+            display: block;
+            color: var(--dark-color);
+        }
+
+        .user-info small {
+            color: #999;
+        }
+
+        /* CONTEÚDO */
+        .content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+        }
+
+        /* CARDS E COMPONENTES */
+        .card {
+            border: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            transition: box-shadow 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #6d4570 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .card-header h5 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        /* BOTÕES */
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #6d4570;
+            border-color: #6d4570;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(139, 90, 143, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #c091c0;
+            border-color: #c091c0;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+            border-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+            border-color: #c82333;
+        }
+
+        .btn-sm {
+            padding: 5px 10px;
+            font-size: 0.85rem;
+        }
+
+        /* TABELAS */
+        .table {
+            margin-bottom: 0;
+        }
+
+        .table thead th {
+            background-color: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 600;
+            border: none;
+            padding: 15px;
+        }
+
+        .table tbody td {
+            padding: 12px 15px;
+            vertical-align: middle;
+            border-color: #e9ecef;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* FORMULÁRIOS */
+        .form-label {
+            font-weight: 500;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            padding: 10px 12px;
+            font-size: 0.95rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(139, 90, 143, 0.25);
+        }
+
+        /* ALERTAS */
+        .alert {
+            border: none;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        /* BADGES */
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .badge-success {
+            background-color: #28a745;
+        }
+
+        .badge-danger {
+            background-color: #dc3545;
+        }
+
+        .badge-warning {
+            background-color: #ffc107;
+            color: var(--dark-color);
+        }
+
+        /* RESPONSIVE */
+        @@media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                box-shadow: none;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .sidebar-footer {
+                position: static;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                padding: 10px 20px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .topbar-user {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .content {
+                padding: 15px;
+            }
+        }
+
+        /* FOTO PREVIEW */
+        .img-preview {
+            max-width: 150px;
+            max-height: 150px;
+            border-radius: 6px;
+            margin-top: 10px;
+            object-fit: cover;
+        }
+
+        /* AÇÕES */
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        .action-buttons .btn {
+            padding: 5px 8px;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h4><i class="fas fa-spa"></i> Salão de Beleza</h4>
+                <p>Sistema de Gestão</p>
+            </div>
+
+            @if (Context.Session.GetInt32("UserId") != null)
+            {
+                <ul class="sidebar-nav">
+                    <li><a asp-controller="Home" asp-action="Index"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a asp-controller="Profissional" asp-action="Index"><i class="fas fa-user-tie"></i> Profissionais</a></li>
+                    <li><a asp-controller="Cliente" asp-action="Index"><i class="fas fa-users"></i> Clientes</a></li>
+                    <li><a asp-controller="Servico" asp-action="Index"><i class="fas fa-cut"></i> Serviços</a></li>
+                    <li><a asp-controller="Produto" asp-action="Index"><i class="fas fa-box"></i> Produtos</a></li>
+                    <li><a asp-controller="Agendamento" asp-action="Index"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
+                    
+                    @if (Context.Session.GetString("Role") == "Admin")
+                    {
+                        <li style="margin-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                            <a asp-controller="Admin" asp-action="Usuarios"><i class="fas fa-cog"></i> Usuários</a>
+                        </li>
+                    }
+                </ul>
+
+                <div class="sidebar-footer">
+                    <a asp-controller="Admin" asp-action="Logout"><i class="fas fa-sign-out-alt"></i> Sair</a>
+                </div>
+            }
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="main-content">
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-title">
+                    @ViewData["Title"]
+                </div>
+                @if (Context.Session.GetInt32("UserId") != null)
+                {
+                    <div class="topbar-user">
+                        <div class="user-info">
+                            <strong>@Context.Session.GetString("Username")</strong>
+                            <small>@Context.Session.GetString("Role")</small>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <!-- CONTEÚDO -->
+            <div class="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,37 @@
+@model SalaoDeBeleza.Models.Cliente
+
+@{
+    ViewData["Title"] = "Editar Cliente";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fas fa-edit"></i> Editar Cliente</h5>
+    </div>
+    <div class="card-body">
+        <form asp-action="Editar" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="IdCliente" value="@Model.IdCliente" />
+
+            <div class="mb-3">
+                <label class="form-label">Nome <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="Nome" value="@Model.Nome" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input type="tel" class="form-control" name="Telefone" value="@(Model.Telefone ?? "")" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" name="DataNascimento" value="@(Model.DataNascimento ?? "")" />
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar Alterações</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

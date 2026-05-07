@@ -1,0 +1,117 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = ProjetoOlimpicos
+build_property.RootNamespace = ProjetoOlimpicos
+build_property.ProjectDir = C:\Users\3bmod\Desktop\SalaoDeBeleza_COMPLETO\SalaoDeBeleza\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\3bmod\Desktop\SalaoDeBeleza_COMPLETO\SalaoDeBeleza
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Admin/AcessoNegado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQWNlc3NvTmVnYWRvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Admin/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Admin/NovoUsuario.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cTm92b1VzdWFyaW8uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Agendamento/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cQ3JpYXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Agendamento/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cRWRpdGFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Agendamento/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbmRhbWVudG9cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Cliente/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxDcmlhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Cliente/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Cliente/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Produto/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xDcmlhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Produto/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Produto/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Profissional/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlzc2lvbmFsXENyaWFyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Profissional/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlzc2lvbmFsXEVkaXRhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Profissional/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmlzc2lvbmFsXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Servico/Criar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vydmljb1xDcmlhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Servico/Editar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vydmljb1xFZGl0YXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Servico/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2Vydmljb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/3bmod/Desktop/SalaoDeBeleza_COMPLETO/SalaoDeBeleza/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-px9hf8lsbp

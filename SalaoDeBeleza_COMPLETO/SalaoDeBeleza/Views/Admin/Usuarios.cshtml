@@ -1,0 +1,100 @@
+@model List<SalaoDeBeleza.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5><i class="fas fa-users-cog"></i> Gerenciar Usuários</h5>
+            <a asp-action="NovoUsuario" class="btn btn-sm btn-primary"><i class="fas fa-plus"></i> Novo Usuário</a>
+        </div>
+    </div>
+    <div class="card-body">
+
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i> @TempData["Sucesso"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (Model.Count == 0)
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-users" style="font-size: 3rem; color: #ccc;"></i>
+                <p class="mt-3 text-muted">Nenhum usuário cadastrado</p>
+                <a asp-action="NovoUsuario" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar Primeiro</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuário</th>
+                            <th>Perfil</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td>@usuario.Id</td>
+                                <td><i class="fas fa-user-circle" style="margin-right: 8px;"></i>@usuario.Username</td>
+                                <td>
+                                    @if (usuario.Role == "Admin")
+                                    {
+                                        <span class="badge" style="background-color:#8b5cf6; color:white;"><i class="fas fa-crown"></i> Admin</span>
+                                    }
+                                    else if (usuario.Role == "Gerente")
+                                    {
+                                        <span class="badge" style="background-color:#f59e0b; color:white;"><i class="fas fa-user-tie"></i> Gerente</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge" style="background-color:#6b7280; color:white;"><i class="fas fa-user"></i> @usuario.Role</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (usuario.Ativo)
+                                    {
+                                        <span class="badge badge-success"><i class="fas fa-check"></i> Ativo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger"><i class="fas fa-times"></i> Inativo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        @if (usuario.Ativo)
+                                        {
+                                            <form asp-action="DesativarUsuario" asp-route-id="@usuario.Id" method="post" style="display:inline;"
+                                                  onsubmit="return confirm('Desativar o usuário @usuario.Username?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Desativar">
+                                                    <i class="fas fa-user-slash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted" style="font-size:0.85rem;">Inativo</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,44 @@
+@model SalaoDeBeleza.Models.Cliente
+
+@{
+    ViewData["Title"] = "Novo Cliente";
+}
+
+<div class="card">
+    <div class="card-header">
+        <h5><i class="fas fa-user-plus"></i> Cadastrar Novo Cliente</h5>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Erro != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle"></i> @ViewBag.Erro
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <form asp-action="Criar" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label">Nome <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="Nome" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Telefone</label>
+                <input type="tel" class="form-control" name="Telefone" placeholder="(11) 99999-9999" />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Data de Nascimento</label>
+                <input type="date" class="form-control" name="DataNascimento" />
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
