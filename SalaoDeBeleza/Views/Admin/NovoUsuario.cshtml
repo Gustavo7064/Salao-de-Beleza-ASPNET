@@ -1,0 +1,47 @@
+@model SalaoDeBeleza.Models.Usuario
+
+@{
+    ViewData["Title"] = "Novo Usuário";
+}
+
+<div class="card" style="max-width:520px;">
+    <div class="card-header">
+        <h5><i class="fas fa-user-plus"></i> Cadastrar Usuário</h5>
+    </div>
+    <div class="card-body">
+        @if (ViewBag.Erro != null)
+        {
+            <div class="alert alert-danger"><i class="fas fa-exclamation-circle"></i> @ViewBag.Erro</div>
+        }
+        @if (ViewBag.Sucesso != null)
+        {
+            <div class="alert alert-success"><i class="fas fa-check-circle"></i> @ViewBag.Sucesso</div>
+        }
+
+        <form asp-action="NovoUsuario" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label">Usuário <span class="text-danger">*</span></label>
+                <input class="form-control" asp-for="Username" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Senha <span class="text-danger">*</span></label>
+                <input class="form-control" asp-for="Password" type="password" required />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Papel</label>
+                <select class="form-select" asp-for="Role">
+                    <option value="Admin">Admin</option>
+                    <option value="Gerente">Gerente</option>
+                    <option value="Leitor">Leitor</option>
+                </select>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
+                <a asp-action="Usuarios" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+@model SalaoDeBeleza.Models.Produto
+
+@{
+    ViewData["Title"] = "Novo Produto";
+}
+
+<div class="page-header">
+    <h2><i class="fas fa-plus-circle"></i> Cadastrar Novo Produto</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        @if (ViewBag.Erro != null)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle"></i> @ViewBag.Erro
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        <form asp-action="Criar" method="post">
+            @Html.AntiForgeryToken()
+
+            <div class="mb-3">
+                <label class="form-label">Nome do Produto <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" name="Nome" placeholder="Ex: Shampoo Hidratante" required />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+                <input type="text" class="form-control" name="Marca" placeholder="Ex: Loreal, Risqué" />
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Preço <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" class="form-control" name="Preco" step="0.01" min="0" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Estoque <span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" name="Estoque" min="0" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

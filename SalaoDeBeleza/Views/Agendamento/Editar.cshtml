@@ -1,0 +1,103 @@
+@model SalaoDeBeleza.Models.Agendamento
+
+@{
+    ViewData["Title"] = "Editar Agendamento";
+}
+
+<div class="page-header">
+    <h2><i class="fas fa-pen"></i> Editar Agendamento</h2>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Editar" method="post">
+            @Html.AntiForgeryToken()
+            <input type="hidden" name="IdAgendamento" value="@Model.IdAgendamento" />
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Cliente <span class="text-danger">*</span></label>
+                        <select class="form-select" name="IdCliente" required>
+                            <option value="">Selecione um cliente</option>
+                            @if (ViewBag.Clientes != null)
+                            {
+                                foreach (var cliente in ViewBag.Clientes)
+                                {
+                                    var selected = cliente.IdCliente == Model.IdCliente ? "selected" : "";
+                                    <option value="@cliente.IdCliente" @@selected>@cliente.Nome</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Profissional <span class="text-danger">*</span></label>
+                        <select class="form-select" name="IdProfissional" required>
+                            <option value="">Selecione um profissional</option>
+                            @if (ViewBag.Profissionais != null)
+                            {
+                                foreach (var prof in ViewBag.Profissionais)
+                                {
+                                    var selected = prof.IdProfissional == Model.IdProfissional ? "selected" : "";
+                                    <option value="@prof.IdProfissional" @@selected>@prof.Nome</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Serviço <span class="text-danger">*</span></label>
+                        <select class="form-select" name="IdServico" required>
+                            <option value="">Selecione um serviço</option>
+                            @if (ViewBag.Servicos != null)
+                            {
+                                foreach (var servico in ViewBag.Servicos)
+                                {
+                                    var selected = servico.IdServico == Model.IdServico ? "selected" : "";
+                                    <option value="@servico.IdServico" @@selected>
+                                        @servico.Nome - R$ @servico.Preco.ToString("F2")
+                                    </option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Data e Hora <span class="text-danger">*</span></label>
+                        <input type="datetime-local" class="form-control" name="DataHora" value="@Model.DataHora" required />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label class="form-label">Status</label>
+                        <select class="form-select" name="Status">
+                            @{
+                                var agendadoSelected = Model.Status == "agendado" ? "selected" : "";
+                                var concluidoSelected = Model.Status == "concluído" ? "selected" : "";
+                                var canceladoSelected = Model.Status == "cancelado" ? "selected" : "";
+                            }
+                            <option value="agendado" @@agendadoSelected>Agendado</option>
+                            <option value="concluído" @@concluidoSelected>Concluído</option>
+                            <option value="cancelado" @@canceladoSelected>Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Salvar Alterações</button>
+                <a asp-action="Index" class="btn btn-secondary"><i class="fas fa-times"></i> Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>

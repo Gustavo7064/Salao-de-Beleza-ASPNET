@@ -1,0 +1,85 @@
+@model List<SalaoDeBeleza.Models.Agendamento>
+
+@{
+    ViewData["Title"] = "Agendamentos";
+}
+
+<div class="page-header">
+    <h2><i class="fas fa-calendar-alt"></i> Agendamentos</h2>
+    <a asp-action="Criar" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Agendamento</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        @if (ViewBag.Sucesso != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i> @ViewBag.Sucesso
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (Model.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon"><i class="fas fa-calendar-alt"></i></div>
+                <p>Nenhum agendamento cadastrado</p>
+                <a asp-action="Criar" class="btn btn-primary"><i class="fas fa-plus"></i> Agendar Agora</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Data/Hora</th>
+                            <th>Cliente</th>
+                            <th>Profissional</th>
+                            <th>Serviço</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var agendamento in Model)
+                        {
+                            <tr>
+                                <td><i class="fas fa-calendar-alt" style="margin-right: 10px; color: var(--brand-300);"></i>@agendamento.DataHora</td>
+                                <td>@agendamento.NomeCliente</td>
+                                <td>@agendamento.NomeProfissional</td>
+                                <td>@agendamento.NomeServico</td>
+                                <td>
+                                    @if (agendamento.Status == "agendado")
+                                    {
+                                        <span class="badge badge-success"><i class="fas fa-check"></i> Agendado</span>
+                                    }
+                                    else if (agendamento.Status == "concluído")
+                                    {
+                                        <span class="badge badge-info"><i class="fas fa-check-double"></i> Concluído</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger"><i class="fas fa-times"></i> Cancelado</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a asp-action="Editar" asp-route-id="@agendamento.IdAgendamento" class="btn btn-sm btn-primary" title="Editar"><i class="fas fa-pen"></i></a>
+                                        @if (agendamento.Ativo)
+                                        {
+                                            <form asp-action="Excluir" asp-route-id="@agendamento.IdAgendamento" method="post" style="display: inline;" onsubmit="return confirm('Cancelar este agendamento?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Cancelar"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

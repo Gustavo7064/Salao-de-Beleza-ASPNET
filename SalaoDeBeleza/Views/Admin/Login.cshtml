@@ -1,0 +1,51 @@
+@{
+    ViewBag.Title = "Login";
+    var returnUrl = ViewBag.ReturnUrl as string;
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login - Salão de Beleza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="auth-shell">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="sidebar-brand-icon"><i class="fas fa-spa"></i></div>
+                <div>
+                    <h4>Salão de Beleza</h4>
+                    <p>Sistema de Gestão</p>
+                </div>
+            </div>
+
+            <h2>Bem-vindo de volta</h2>
+            <p class="auth-subtitle">Entre com suas credenciais para acessar o painel.</p>
+
+            @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+            <form method="post" asp-action="Login">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="returnUrl" value="@returnUrl" />
+
+                <div class="mb-3">
+                    <label class="form-label">Usuário</label>
+                    <input class="form-control" name="username" required autofocus />
+                </div>
+                <div class="mb-4">
+                    <label class="form-label">Senha</label>
+                    <input class="form-control" name="password" type="password" required />
+                </div>
+                <button class="btn btn-brand w-100" type="submit"><i class="fas fa-right-to-bracket"></i> Entrar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

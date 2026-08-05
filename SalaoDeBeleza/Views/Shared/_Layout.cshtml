@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Salão de Beleza</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+    @{
+        var currentController = ViewContext.RouteData.Values["controller"]?.ToString() ?? "";
+        var username = Context.Session.GetString("Username");
+        var userInitial = string.IsNullOrEmpty(username) ? "?" : username.Substring(0, 1).ToUpper();
+    }
+    <div class="main-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-brand-icon"><i class="fas fa-spa"></i></div>
+                <div>
+                    <h4>Salão de Beleza</h4>
+                    <p>Sistema de Gestão</p>
+                </div>
+            </div>
+
+            @if (Context.Session.GetInt32("UserId") != null)
+            {
+                <ul class="sidebar-nav">
+                    <li><a asp-controller="Home" asp-action="Index" class="@(currentController == "Home" ? "active" : "")"><i class="fas fa-grip"></i> Dashboard</a></li>
+
+                    <li class="nav-section-label">Operação</li>
+                    <li><a asp-controller="Agendamento" asp-action="Index" class="@(currentController == "Agendamento" ? "active" : "")"><i class="fas fa-calendar-alt"></i> Agendamentos</a></li>
+                    <li><a asp-controller="Cliente" asp-action="Index" class="@(currentController == "Cliente" ? "active" : "")"><i class="fas fa-users"></i> Clientes</a></li>
+
+                    <li class="nav-section-label">Catálogo</li>
+                    <li><a asp-controller="Profissional" asp-action="Index" class="@(currentController == "Profissional" ? "active" : "")"><i class="fas fa-user-tie"></i> Profissionais</a></li>
+                    <li><a asp-controller="Servico" asp-action="Index" class="@(currentController == "Servico" ? "active" : "")"><i class="fas fa-cut"></i> Serviços</a></li>
+                    <li><a asp-controller="Produto" asp-action="Index" class="@(currentController == "Produto" ? "active" : "")"><i class="fas fa-box"></i> Produtos</a></li>
+
+                    @if (Context.Session.GetString("Role") == "Admin")
+                    {
+                        <li class="nav-section-label">Administração</li>
+                        <li><a asp-controller="Admin" asp-action="Usuarios" class="@(currentController == "Admin" ? "active" : "")"><i class="fas fa-user-shield"></i> Usuários</a></li>
+                    }
+                </ul>
+
+                <div class="sidebar-footer">
+                    <a asp-controller="Admin" asp-action="Logout"><i class="fas fa-arrow-right-from-bracket"></i> Sair</a>
+                </div>
+            }
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <div class="main-content">
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div style="display:flex; align-items:center;">
+                    @if (Context.Session.GetInt32("UserId") != null)
+                    {
+                        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Abrir menu" type="button">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    }
+                    <div class="topbar-title">@ViewData["Title"]</div>
+                </div>
+                @if (Context.Session.GetInt32("UserId") != null)
+                {
+                    <div class="topbar-user">
+                        <div class="user-info">
+                            <strong>@Context.Session.GetString("Username")</strong>
+                            <small>@Context.Session.GetString("Role")</small>
+                        </div>
+                        <div class="user-avatar">@userInitial</div>
+                    </div>
+                }
+            </div>
+
+            <!-- CONTEÚDO -->
+            <div class="content">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,95 @@
+@model List<SalaoDeBeleza.Models.Usuario>
+
+@{
+    ViewData["Title"] = "Usuários";
+}
+
+<div class="page-header">
+    <h2><i class="fas fa-user-shield"></i> Usuários</h2>
+    <a asp-action="NovoUsuario" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Usuário</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        @if (TempData["Sucesso"] != null)
+        {
+            <div class="alert alert-success"><i class="fas fa-check-circle"></i> @TempData["Sucesso"]</div>
+        }
+
+        @if (Model.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon"><i class="fas fa-users"></i></div>
+                <p>Nenhum usuário cadastrado</p>
+                <a asp-action="NovoUsuario" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar Primeiro</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Usuário</th>
+                            <th>Perfil</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var usuario in Model)
+                        {
+                            <tr>
+                                <td class="text-muted">@usuario.Id</td>
+                                <td><i class="fas fa-user-circle" style="margin-right: 8px; color: var(--brand-400);"></i>@usuario.Username</td>
+                                <td>
+                                    @if (usuario.Role == "Admin")
+                                    {
+                                        <span class="badge" style="background-color:#f0e7fb; color:#7c3aed;"><i class="fas fa-crown"></i> Admin</span>
+                                    }
+                                    else if (usuario.Role == "Gerente")
+                                    {
+                                        <span class="badge badge-warning"><i class="fas fa-user-tie"></i> Gerente</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge" style="background-color:#eef0f2; color:#4b5563;"><i class="fas fa-user"></i> @usuario.Role</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (usuario.Ativo)
+                                    {
+                                        <span class="badge badge-success"><i class="fas fa-check"></i> Ativo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger"><i class="fas fa-times"></i> Inativo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        @if (usuario.Ativo)
+                                        {
+                                            <form asp-action="DesativarUsuario" asp-route-id="@usuario.Id" method="post" style="display:inline;"
+                                                  onsubmit="return confirm('Desativar o usuário @usuario.Username?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Desativar">
+                                                    <i class="fas fa-user-slash"></i>
+                                                </button>
+                                            </form>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted small">Inativo</span>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>

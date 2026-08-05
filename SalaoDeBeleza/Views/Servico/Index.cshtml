@@ -1,0 +1,79 @@
+@model List<SalaoDeBeleza.Models.Servico>
+
+@{
+    ViewData["Title"] = "Serviços";
+}
+
+<div class="page-header">
+    <h2><i class="fas fa-cut"></i> Serviços</h2>
+    <a asp-action="Criar" class="btn btn-primary"><i class="fas fa-plus"></i> Novo Serviço</a>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        @if (ViewBag.Sucesso != null)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle"></i> @ViewBag.Sucesso
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
+
+        @if (Model.Count == 0)
+        {
+            <div class="empty-state">
+                <div class="empty-icon"><i class="fas fa-cut"></i></div>
+                <p>Nenhum serviço cadastrado</p>
+                <a asp-action="Criar" class="btn btn-primary"><i class="fas fa-plus"></i> Cadastrar Primeiro</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Preço</th>
+                            <th>Duração (min)</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var servico in Model)
+                        {
+                            <tr>
+                                <td><i class="fas fa-cut" style="margin-right: 10px; color: var(--brand-300);"></i>@servico.Nome</td>
+                                <td><strong>R$ @servico.Preco.ToString("F2")</strong></td>
+                                <td>@servico.DuracaoMin min</td>
+                                <td>
+                                    @if (servico.Ativo)
+                                    {
+                                        <span class="badge badge-success"><i class="fas fa-check"></i> Ativo</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge badge-danger"><i class="fas fa-times"></i> Inativo</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <a asp-action="Editar" asp-route-id="@servico.IdServico" class="btn btn-sm btn-primary" title="Editar"><i class="fas fa-pen"></i></a>
+                                        @if (servico.Ativo)
+                                        {
+                                            <form asp-action="Excluir" asp-route-id="@servico.IdServico" method="post" style="display: inline;" onsubmit="return confirm('Desativar este serviço?');">
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-sm btn-danger" title="Desativar"><i class="fas fa-trash"></i></button>
+                                            </form>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+</div>
